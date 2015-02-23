@@ -8,25 +8,25 @@ using namespace std;
 using namespace cv;
 
 #define REFRACTORY_DURATION 5000
+#define WRITE_BUFFER_SIZE 30
 
-long i=0;
+long i=0;						// Lord in heaven, global variable!
 atomic<bool> done(true);
 
 void write_out( vector<Mat> collect )
 {
 	done = false;
-	cout<<"new thread"<<endl;
 	for( auto f: collect )
 		imwrite( "Parikshit/"+std::to_string(i++)+".jpg", f );
 	done = true;
-	cout<<"del thread"<<endl;
 
 }
 int main()
 {
 
 	system("sudo rm -r Parikshit");
-	system("mkdir Parikshit");
+	system("mkdir Parikshit");			// always create a new *empty* directory.
+	
 	vector<thread> t;
 	if( wiringPiSetup() == -1 )
 	{
@@ -34,14 +34,15 @@ int main()
 		return -1;
 	}
 	pinMode(11, INPUT);
-	digitalWrite(11, LOW);
+	digitalWrite(11, LOW);				// this pin going high (3.3V) terminates code.
+	
 	VideoCapture cap(0);
 	if( !cap.isOpened() )
 	{	cout<<"cam not ready"<<endl; return 0;	}
 
 	delay(REFRACTORY_DURATION);
 
-	vector<Mat> collection;
+	vector<Mat> collection(WRITE_BUFFER_SIZE);			// pre-allocate for speed.
 	Mat frame;
 	cout<<"capture running.. "<<endl;
 	while( digitalRead(11) == LOW )
@@ -50,28 +51,25 @@ int main()
 		//cvtColor( frame, frame, COLOR_BGR2GRAY );
 		delay(25);
 		collection.push_back( frame.clone() );
-		if( collection.size() == 30 )
+		if( collection.size() == WRITE_BUFFER_SIZE )
 		{
-			cout<<"can I launch another thread?"<<endl;
 			if(!done)
 			{
-				cout<<"waiting.."<<endl;
+				cout<<"waiting for previous thread to finish.."<<endl;
 				t.back().join();
 			}
 			t.push_back( thread( write_out, collection ) );
 			collection.clear();
-
 		}
-		cout<<"current buffer: "<<collection.size()<<endl;
 	}
 	cout<<"done capturing "<<collection.size()<<" images."<<endl;
 	cap.release();
-	t.back().join();
+	t.back().join();					// wait for the last thread to finish.
 
 	for( auto f: collection )
-		imwrite( "Parikshit/"+std::to_string(i++)+".jpg", f );
+		imwrite( "Parikshit/"+std::to_string(i++)+".jpg", f );		// write the remaining stuff.
 
-	cout<<"done writing.\n";
+	cout<<"done writing."<<endl;
 	system("sudo shutdown -h now");
 	return 1;
 }
