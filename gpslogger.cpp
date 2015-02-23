@@ -35,7 +35,12 @@ int main()
                                 //      break;
                         }
                         gpsdata[idx] = '\0';
-                        cout<<gpsdata<<"\n-----------------"<<endl;
+                        serialGetchar(fd); serialGetchar(fd); serialGetchar(fd); serialGetchar(fd);
+                        
+                        string ss(gpsdata);
+                        if( ss.find("$GPRMC") == 0 )
+                                cout<<ss<<endl;
+
                 }
         }
         return 0;
