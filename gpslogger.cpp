@@ -38,8 +38,27 @@ int main()
                         serialGetchar(fd); serialGetchar(fd); serialGetchar(fd); serialGetchar(fd);
                         
                         string ss(gpsdata);
-                        if( ss.find("$GPRMC") == 0 )
-                                cout<<ss<<endl;
+                        vector<string> tkns;
+                        int start = 0, pos;
+                        pos = gps_string.find( ",", start );
+                        if( gps_string.substr( start, pos-start ) == "$GPRMC" )
+                        {
+                                if( gps_string.find_first_of("A") == string::npos )
+                                {
+                                        cout<<"GPS warning!"<<endl;
+                                        continue;
+                                }
+                                start = pos+1;
+                                do {
+                                        pos = gps_string.find( ",", start );
+                                        tkns.push_back( gps_string.substr( start, pos-start ) );
+                                        start = pos+1;
+                                } while( tkns.back() != "E" );
+
+                                cout<<"UTC:\t"<<tkns[0]<<endl;
+                                cout<<tkns[2]<<" north\n";
+                                cout<<tkns[4]<<" east"<<endl;
+                        }
 
                 }
         }
