@@ -13,14 +13,14 @@ void gps_thread_entry()
         if( wiringPiSetup() == -1 )                     // init wiringPi.
         {
                 cout<<"wiring not done."<<endl;
-                return 0;
+                return;
         }
 
         fd = serialOpen("/dev/ttyAMA0", 9600);          // ensure correct string for serial port.
         if( fd < 0 )
         {
                 cout<<"can't open port."<<endl;
-                return 0;
+                return;
         }
 
         // UTTERLY BAD (ALTHOUGH FUNCTIONAL) CODE FOLLOWS..
