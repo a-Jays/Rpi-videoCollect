@@ -42,10 +42,13 @@ int frames_collect()
 		cap >> frame;
 		//cvtColor( frame, frame, COLOR_BGR2GRAY );
 		delay(25);
+		if( !gps_lock )
+			continue;
+		
 		collection.push_back( frame.clone() );
 		if( collection.size() == WRITE_BUFFER_SIZE )
 		{
-			if(!done)
+			if( !buffer_empty )
 			{
 				cout<<"waiting for previous thread to finish.."<<endl;
 				t.back().join();
