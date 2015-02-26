@@ -1,10 +1,17 @@
 #include "opencv2/opencv.hpp"
+#include <iostream>
+#include <thread>
+#include <atomic>
+#include <wiringPi.h>
 
 #define REFRACTORY_DURATION 5000
 #define WRITE_BUFFER_SIZE 30
 
 long i=0;						// Lord in heaven, global variable!
 atomic<bool> buffer_empty(true);
+
+using namespace std;
+using namespace cv;
 
 void write_out( vector<Mat> collect )
 {
