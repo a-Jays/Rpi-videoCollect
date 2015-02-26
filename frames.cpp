@@ -23,9 +23,6 @@ void write_out( vector<Mat> collect )
 int frames_collect()
 {
 
-	system("sudo rm -r Parikshit");
-	system("mkdir Parikshit");			// always create a new *empty* directory.
-	
 	vector<thread> t;
 	if( wiringPiSetup() == -1 )
 	{
