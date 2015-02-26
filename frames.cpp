@@ -1,8 +1,3 @@
-#include "opencv2/opencv.hpp"
-#include <iostream>
-#include <thread>
-#include <atomic>
-#include <wiringPi.h>
 
 #define REFRACTORY_DURATION 5000
 #define WRITE_BUFFER_SIZE 30
