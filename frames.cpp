@@ -8,7 +8,7 @@
 #define WRITE_BUFFER_SIZE 30
 
 long i=0;						// Lord in heaven, global variable!
-atomic<bool> buffer_empty(true);
+std::atomic<bool> buffer_empty(true);
 
 using namespace std;
 using namespace cv;
