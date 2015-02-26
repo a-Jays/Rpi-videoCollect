@@ -15,5 +15,7 @@ Check CPU loads.
 
 *Requires C++11. Compile with `-std=c++0x`.*
 
+*Requires OpenCV installed. Compile with suitable libraries.*
+
 Compile only `main.cpp` into an executable. Consider enabling `O3` (or equivalent) -level optimisations for performance.
 Run with `sudo` level permissions (required by Wiring).
