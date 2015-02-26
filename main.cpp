@@ -1,11 +1,15 @@
 #include <iostream>
 #include <thread>
 #include <atomic>
-#include "gps_logger.cpp"
-#include "frames.cpp"
-
+#include "opencv2/opencv.hpp"
+#include <wiringPi.h>
+#include <wiringSerial.h>
 
 using namespace std;
+using namespace cv;
+
+#include "gps_logger.cpp"
+#include "frames.cpp"
 
 int main()
 {
