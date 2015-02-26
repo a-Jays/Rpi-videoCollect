@@ -1,9 +1,9 @@
 #include <iostream>
 #include <thread>
 #include <atomic>
-
-#include "frames.cpp"
 #include "gps_logger.cpp"
+#include "frames.cpp"
+
 
 using namespace std;
 
