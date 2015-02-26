@@ -2,7 +2,8 @@
 #include <thread>
 #include <atomic>
 #include "opencv2/opencv.hpp"
-#include <wiringPi.h>
+
+#include "gps_logger.cpp"
 
 using namespace std;
 using namespace cv;
@@ -11,14 +12,14 @@ using namespace cv;
 #define WRITE_BUFFER_SIZE 30
 
 long i=0;						// Lord in heaven, global variable!
-atomic<bool> done(true);
+atomic<bool> buffer_empty(true);
 
 void write_out( vector<Mat> collect )
 {
-	done = false;
+	buffer_empty = false;
 	for( auto f: collect )
 		imwrite( "Parikshit/"+std::to_string(i++)+".jpg", f );
-	done = true;
+	buffer_empty = true;
 
 }
 int main()
