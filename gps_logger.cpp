@@ -39,7 +39,7 @@ void gps_thread_entry()
                         serialGetchar(fd); serialGetchar(fd); serialGetchar(fd); serialGetchar(fd);
                         // the above is to clear out the gps data in line (checksum and EOL). Think serial flush.
                         
-                        string ss(gpsdata);
+                        string gps_string(gpsdata);
                         vector<string> tokns;
                         int start = 0, pos;
                         pos = gps_string.find( ",", start );
