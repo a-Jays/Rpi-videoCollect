@@ -1,5 +1,8 @@
 #include <wiringPi.h>
 #include <wiringSerial.h>
+#include <iostream>
+#include <atomic>
+#include "opencv2/opencv.hpp"
 
 std::atomic<bool> gps_lock = false;
 
