@@ -1,8 +1,5 @@
 #include "opencv2/opencv.hpp"
 
-using namespace std;
-using namespace cv;
-
 #define REFRACTORY_DURATION 5000
 #define WRITE_BUFFER_SIZE 30
 
@@ -15,9 +12,8 @@ void write_out( vector<Mat> collect )
 	for( auto f: collect )
 		imwrite( "Parikshit/"+std::to_string(i++)+".jpg", f );
 	buffer_empty = true;
-
 }
-int main()
+int frames_collect()
 {
 
 	system("sudo rm -r Parikshit");
@@ -66,6 +62,6 @@ int main()
 		imwrite( "Parikshit/"+std::to_string(i++)+".jpg", f );		// write the remaining stuff.
 
 	cout<<"done writing."<<endl;
-	system("sudo shutdown -h now");
+	// shutdown has been moved to main.cpp -- just return from here.
 	return 1;
 }
