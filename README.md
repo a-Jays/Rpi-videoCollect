@@ -12,6 +12,7 @@ TODO:
 Check CPU loads.
 
 *Requires `wiringPi` installed. Compile with `-lwiringPi`.*
+
 *Requires C++11. Compile with `-std=c++0x`.*
 
 Compile only `main.cpp` into an executable. Consider enabling `O3` (or equivalent) -level optimisations for performance.
