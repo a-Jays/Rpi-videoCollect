@@ -1,9 +1,4 @@
-#include <iostream>
-#include <thread>
-#include <atomic>
 #include "opencv2/opencv.hpp"
-
-#include "gps_logger.cpp"
 
 using namespace std;
 using namespace cv;
