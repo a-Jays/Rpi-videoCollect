@@ -1,10 +1,4 @@
-#include <wiringPi.h>
-#include <wiringSerial.h>
-#include <iostream>
-#include <atomic>
-#include "opencv2/opencv.hpp"
 
-using namespace std;
 std::atomic<bool> gps_lock = false;
 
 void gps_thread_entry()
